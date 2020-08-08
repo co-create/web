@@ -1,6 +1,5 @@
 {
   "projects": {
-    "techgonomist": "techgronomist",
     "default": "techgronomist"
   }
 }
