@@ -38,6 +38,19 @@ class App extends Component {
 		}
 	}
 
+	computeColor() {
+		let maxDistance = this.state.maxDistance;
+		let distance = this.computeDistance();
+
+		if (distance <= 0.05 * maxDistance) {
+			return "red";
+		} else if (distance <= 0.2 * maxDistance) {
+			return "yellow";
+		} else {
+			return "green";
+		}
+	}
+
 	computeDistance() {
 		if (this.state.mode === "in") {
 			return (this.state.distance);
@@ -78,11 +91,12 @@ class App extends Component {
   render() {
     return (
 			<div className="Container">
+				<h1 style={{marginTop:20}}>Ultrasonic Sensor Measurement</h1>
 				<div className="Graph">
-					<div style={{backgroundColor: "blue", height: 400 * this.computeDistance() / this.state.maxDistance}}>
+					<div style={{backgroundColor: this.computeColor(), height: 400 * this.computeDistance() / this.state.maxDistance}}>
 					</div>
 				</div>
-				<p>{this.computeDistance()} {this.state.mode}</p>
+				<p style={{marginBottom:0}}>{this.computeDistance()} {this.state.mode}</p>
 				<p>{Math.round(this.computeDistance() / this.state.maxDistance * 100)} %</p>
 				<div style={{height:60}}/>
 				<h3>Measurement System</h3>
